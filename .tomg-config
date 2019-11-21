@@ -1,0 +1,27 @@
+[
+  {
+    "host": "172.18.0.2",
+    "port": 3306,
+    "databaseName": "users",
+    "user": "root",
+    "password": "root",
+    "databaseType": "mysql",
+    "schemaName": "",
+    "ssl": false
+  },
+  {
+    "resultsPath": "/home/john/Dropbox/projects/micro-services/users/src/model",
+    "noConfigs": false,
+    "convertCaseFile": "camel",
+    "convertCaseEntity": "camel",
+    "convertCaseProperty": "camel",
+    "propertyVisibility": "public",
+    "lazy": true,
+    "activeRecord": false,
+    "generateConstructor": true,
+    "customNamingStrategyPath": "",
+    "relationIds": true,
+    "strictMode": false,
+    "skipSchema": false
+  }
+]
