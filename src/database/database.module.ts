@@ -25,7 +25,9 @@ import {ContactEntity} from './entities/contact.entity';
         ]),
     ],
     providers: [],
-    exports: [],
+    exports: [
+        TypeOrmModule,
+    ],
 })
 export class DatabaseModule {
 }
