@@ -8,6 +8,7 @@ import {LoginEntity} from './entities/login.entity';
 import {DocumentsTypesEntity} from './entities/documents-types.entity';
 import {DocumentEntity} from './entities/document.entity';
 import {ContactEntity} from './entities/contact.entity';
+import {UsersService} from './services/users.service';
 
 @Module({
     imports: [
@@ -24,9 +25,12 @@ import {ContactEntity} from './entities/contact.entity';
             ContactEntity,
         ]),
     ],
-    providers: [],
+    providers: [
+        UsersService,
+    ],
     exports: [
         TypeOrmModule,
+        UsersService,
     ],
 })
 export class DatabaseModule {

@@ -1,16 +1,18 @@
-import {Controller, Get, Header, HttpCode} from '@nestjs/common';
-import {AppService} from './app.service';
+import {Controller, Get} from '@nestjs/common';
 import {UserEntity} from './database/entities/user.entity';
+import {CrudController} from '@nestjsx/crud';
+import {UsersService} from './database/services/users.service';
 
 @Controller()
-export class AppController {
-    constructor(private readonly appService: AppService) {
+export class AppController implements CrudController<UserEntity> {
+    constructor(public service: UsersService) {
     }
 
     @Get('/')
-    @HttpCode(200)
-    @Header('Content-Type', 'application/hal+json')
-    public index(): Promise<UserEntity[]> {
-        return this.appService.fetchAll();
+    pingAction() {
+        return {
+            status: 'ok',
+            pong: new Date().getMilliseconds(),
+        };
     }
 }
