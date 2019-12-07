@@ -1,19 +1,23 @@
 import {Injectable} from '@nestjs/common';
+import {InvalidConfigurationException} from '../exception/invalid-configuration.exception';
+import * as dotenv from 'dotenv';
+import * as fs from 'fs';
 
 @Injectable()
 export class ConfigurationService {
     private readonly envConfigurations: any;
 
-    constructor() {
-        this.envConfigurations = require('dotenv').config().parsed;
+    constructor(filePath: string) {
+        this.envConfigurations = dotenv.parse(fs.readFileSync(filePath));
     }
 
-    get baseUrl(): string {
-        return this.envConfigurations.BASE_URL;
-    }
+    public get(configName: string): any {
 
-    get applicationPort(): string {
-        return this.envConfigurations.BASE_URL;
+        if (this.envConfigurations.hasOwnProperty(configName)) {
+            return this.envConfigurations[configName];
+        }
+
+        throw new InvalidConfigurationException(configName);
     }
 
 }

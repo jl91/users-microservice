@@ -1,23 +1,23 @@
 import {Injectable} from '@nestjs/common';
 import {TypeOrmModuleOptions, TypeOrmOptionsFactory} from '@nestjs/typeorm';
+import {ConfigurationService} from '../../configuration/services/configuration.service';
 
 @Injectable()
 export class TypeOrmConfigurationService implements TypeOrmOptionsFactory {
 
-    private envConfigurations;
-
-    constructor() {
-        this.envConfigurations = require('dotenv').config().parsed;
+    constructor(
+        private configurationService: ConfigurationService,
+    ) {
     }
 
-    createTypeOrmOptions(): TypeOrmModuleOptions {
+    public createTypeOrmOptions(): TypeOrmModuleOptions {
         return {
-            type: this.envConfigurations.DATABASE_TYPE,
-            host: this.envConfigurations.DATABASE_HOST,
-            port: this.envConfigurations.DATABASE_PORT,
-            username: this.envConfigurations.DATABASE_USER,
-            password: this.envConfigurations.DATABASE_PASSWORD,
-            database: this.envConfigurations.DATABASE_NAME,
+            type: this.configurationService.get('DATABASE_TYPE'),
+            host: this.configurationService.get('DATABASE_HOST'),
+            port: this.configurationService.get('DATABASE_PORT'),
+            username: this.configurationService.get('DATABASE_USER'),
+            password: this.configurationService.get('DATABASE_PASSWORD'),
+            database: this.configurationService.get('DATABASE_NAME'),
             synchronize: false,
             entities: [__dirname + '/../../database/entities/**/*.entity{.ts,.js}'],
             migrations: [__dirname + '/../../database/migrations/**/*.migration{.ts,.js}'],
