@@ -7,7 +7,7 @@ import {UsersModule} from './users/users.module';
 @Module({
     imports: [
         SharedModule,
-        UsersModule
+        UsersModule,
     ],
     controllers: [
         AppController,
